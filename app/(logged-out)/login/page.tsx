@@ -5,17 +5,18 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { PersonStandingIcon } from "lucide-react";
 import { z } from "zod";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
     email: z.string().email(),
     password: z.string(),
 })
 
 export default function LoginPage() {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -24,8 +25,9 @@ export default function LoginPage() {
         },
     })
 
-    const handleSubmit = () => {
-        console.log('handle Submit');
+    const handleSubmit = (data: z.infer<typeof formSchema>) => {
+        console.log('data submitted', data);
+        router.push("/dashboard");
     }
 
     return (
@@ -34,8 +36,8 @@ export default function LoginPage() {
             <Card className="w-full max-w-sm">
                 <CardHeader>
                     <CardTitle>Login</CardTitle>
-                <CardDescription>
-                    Login to your account
+                    <CardDescription>
+                        Login to your account
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -14,7 +14,7 @@ export default function LandingPage() {
                 </Button>
                 <small>or</small>
                 <Button variant="outline" asChild>
-                    <Link href="/signup">Sign up</Link>
+                    <Link href="/sign-up">Sign up</Link>
                 </Button>
             </div>
         </>
